@@ -29,7 +29,7 @@
                            <input type="text" id="input-1" class="form-control text-center" value="1">
                            <button class="btn btn-default" id="plus-btn-first"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="current-price">1219</span></h5>
+                        <h5>$ <span id="current-price-first">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" id="a" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="minus-btn-second" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="input-2" type="text" class="form-control text-center" id="a" value="1">
+                           <button id="plus-btn-second" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$ <span id="current-price-second">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5 >$ <span id="sub-total">1,278</span></h5>
+                        <h5>$ <span id="tax">63.9</span></h5>
+                        <h5>$ <span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -77,53 +77,64 @@
          </div>
       </div>
    </section>
+
+   <script>
+      //first item plus button setup
+   const plusBtnFirst=document.getElementById('plus-btn-first');
+   plusBtnFirst.addEventListener('click',()=>{
+      update('+','input-1','current-price-first');
+      
+   });
+
+   //first item Subtraction button setup
+   const minusBtnFirst=document.getElementById('minus-btn-first');
+   minusBtnFirst.addEventListener('click',()=>{
+      update('-','input-1','current-price-first');
+      
+   });
+   //second item plus button setup
+   const plusBtnSecond=document.getElementById('plus-btn-second');
+   plusBtnSecond.addEventListener('click',()=>{
+      update('+','input-2','current-price-second');
+      
+   });
+   //second item Subtraction button setup
+   const minusBtnSecond=document.getElementById('minus-btn-second');
+   minusBtnSecond.addEventListener('click',()=>{
+      update('-','input-2','current-price-second');
+      
+   });
+   
+
+   //update system function   
+   function update(symbol,currentNumber,currentPrice){
+      let number=document.getElementById(currentNumber).value;
+      number=parseInt(number);
+      const updatePrice=document.getElementById(currentPrice).innerText;
+      let updatePriceNumber=parseFloat(updatePrice);
+      if(symbol=='+'){
+         number++;
+         document.getElementById(currentPrice).innerText=updatePriceNumber+1219;
+      }
+      else{
+         number--;
+         document.getElementById(currentPrice).innerText=updatePriceNumber-1219;
+      }
+      const newNumber=document.getElementById(currentNumber).value=number;
+
+      //set total and subtotal and total
+      const firstPrice=document.getElementById('current-price-first').innerText;
+      const secondPrice=document.getElementById('current-price-second').innerText;
+      const firstPriceNumber=parseFloat(firstPrice);
+      const secondPriceNumber=parseFloat(secondPrice);
+      const subTotal=firstPriceNumber+secondPriceNumber;
+      const tax=subTotal*5/100;
+      const total=subTotal+tax;
+      console.log(subTotal);
+      document.getElementById('sub-total').innerText=subTotal;
+      document.getElementById('tax').innerText=taxNumber;
+      document.getElementById('total').innerText=subTotal+tax;
+   }
+   </script>
 </body>
-<script>
-   //first item plus button setup
-  const plusBtnFirst=document.getElementById('plus-btn-first');
-  plusBtnFirst.addEventListener('click',()=>{
-     update('+','input-1','current-price');
-    
-  });
-
-  //first item Subtraction button setup
-  const minusBtnFirst=document.getElementById('minus-btn-first');
-  minusBtnFirst.addEventListener('click',()=>{
-     update('-','input-1','current-price');
-    
-  });
-  //first item plus button setup
-  const plusBtnFirst=document.getElementById('plus-btn-first');
-  plusBtnFirst.addEventListener('click',()=>{
-     update('+','input-1','current-price');
-    
-  });
-
-  //first item Subtraction button setup
-  const minusBtnFirst=document.getElementById('minus-btn-first');
-  minusBtnFirst.addEventListener('click',()=>{
-     update('-','input-1','current-price');
-    
-  });
-
-  //update system function   
-  function update(symbol,currentNumber,currentPrice){
-   let number=document.getElementById(currentNumber).value;
-   number=parseInt(number);
-   const updatePrice=document.getElementById(currentPrice).innerText;
-   let updatePriceNumber=parseFloat(updatePrice);
-   if(symbol=='+'){
-      number++;
-      document.getElementById(currentPrice).innerText=updatePriceNumber+1219;
-     }
-     else{
-      number--;
-      document.getElementById(currentPrice).innerText=updatePriceNumber-1219;
-     }
-    const newNumber=document.getElementById(currentNumber).value=number;
-     
-     
-  }
-</script>
-
 </html>
