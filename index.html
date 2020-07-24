@@ -25,7 +25,7 @@
 
                      <div class="col-md-6 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button class="btn btn-default" id="minus-btn-first"><i class="fas fa-minus"></i></button>
                            <input type="text" id="input-1" class="form-control text-center" value="1">
                            <button class="btn btn-default" id="plus-btn-first"><i class="fas fa-plus"></i></button>
                         </div>
@@ -79,18 +79,51 @@
    </section>
 </body>
 <script>
+   //first item plus button setup
   const plusBtnFirst=document.getElementById('plus-btn-first');
   plusBtnFirst.addEventListener('click',()=>{
-     let number=document.getElementById('input-1').value;
-     number++;
-     number=parseInt(number);
-     console.log(number);
-     const newNumber=document.getElementById('input-1').value=number;
-     const currentPrice=document.getElementById('current-price').innerText;
-     const currentPriceNumber=parseFloat(currentPrice);
-     document.getElementById('current-price').innerText=currentPriceNumber*number;
+     update('+','input-1','current-price');
     
   });
+
+  //first item Subtraction button setup
+  const minusBtnFirst=document.getElementById('minus-btn-first');
+  minusBtnFirst.addEventListener('click',()=>{
+     update('-','input-1','current-price');
+    
+  });
+  //first item plus button setup
+  const plusBtnFirst=document.getElementById('plus-btn-first');
+  plusBtnFirst.addEventListener('click',()=>{
+     update('+','input-1','current-price');
+    
+  });
+
+  //first item Subtraction button setup
+  const minusBtnFirst=document.getElementById('minus-btn-first');
+  minusBtnFirst.addEventListener('click',()=>{
+     update('-','input-1','current-price');
+    
+  });
+
+  //update system function   
+  function update(symbol,currentNumber,currentPrice){
+   let number=document.getElementById(currentNumber).value;
+   number=parseInt(number);
+   const updatePrice=document.getElementById(currentPrice).innerText;
+   let updatePriceNumber=parseFloat(updatePrice);
+   if(symbol=='+'){
+      number++;
+      document.getElementById(currentPrice).innerText=updatePriceNumber+1219;
+     }
+     else{
+      number--;
+      document.getElementById(currentPrice).innerText=updatePriceNumber-1219;
+     }
+    const newNumber=document.getElementById(currentNumber).value=number;
+     
+     
+  }
 </script>
 
 </html>
