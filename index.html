@@ -18,18 +18,18 @@
             <div class="col-md-12 col-lg-10 mx-auto">
                <div class="cart-item">
                   <div class="row">
-                     <div class="col-md-7 center-item">
+                     <div class="col-md-6 center-item">
                         <img src="images/product-1.png" alt="">
                         <h5>iPhone 11 128GB Black</h5>
                      </div>
 
-                     <div class="col-md-5 center-item">
+                     <div class="col-md-6 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input type="text" id="input-1" class="form-control text-center" value="1">
+                           <button class="btn btn-default" id="plus-btn-first"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
+                        <h5>$ <span id="current-price">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -44,7 +44,7 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
+                           <input type="text" class="form-control text-center" id="a" value="1">
                            <button class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
@@ -78,5 +78,19 @@
       </div>
    </section>
 </body>
+<script>
+  const plusBtnFirst=document.getElementById('plus-btn-first');
+  plusBtnFirst.addEventListener('click',()=>{
+     let number=document.getElementById('input-1').value;
+     number++;
+     number=parseInt(number);
+     console.log(number);
+     const newNumber=document.getElementById('input-1').value=number;
+     const currentPrice=document.getElementById('current-price').innerText;
+     const currentPriceNumber=parseFloat(currentPrice);
+     document.getElementById('current-price').innerText=currentPriceNumber*number;
+    
+  });
+</script>
 
 </html>
