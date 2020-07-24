@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div class="cart-item " id="cart-first">
                   <div class="row">
                      <div class="col-md-6 center-item">
                         <img src="images/product-1.png" alt="">
@@ -30,7 +30,7 @@
                            <button class="btn btn-default" id="plus-btn-first"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="current-price-first">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <button id="remove-item1"><img src="images/remove.png" alt="" class="remove-item"></button>
                      </div>
                   </div>
                </div>
@@ -80,61 +80,79 @@
 
    <script>
       //first item plus button setup
-   const plusBtnFirst=document.getElementById('plus-btn-first');
-   plusBtnFirst.addEventListener('click',()=>{
-      update('+','input-1','current-price-first');
-      
-   });
+      const plusBtnFirst=document.getElementById('plus-btn-first');
+      plusBtnFirst.addEventListener('click',()=>{
+         update('+',1,'input-1','current-price-first');
+         
+      });
 
-   //first item Subtraction button setup
-   const minusBtnFirst=document.getElementById('minus-btn-first');
-   minusBtnFirst.addEventListener('click',()=>{
-      update('-','input-1','current-price-first');
-      
-   });
-   //second item plus button setup
-   const plusBtnSecond=document.getElementById('plus-btn-second');
-   plusBtnSecond.addEventListener('click',()=>{
-      update('+','input-2','current-price-second');
-      
-   });
-   //second item Subtraction button setup
-   const minusBtnSecond=document.getElementById('minus-btn-second');
-   minusBtnSecond.addEventListener('click',()=>{
-      update('-','input-2','current-price-second');
-      
-   });
-   
+      //first item Subtraction button setup
+      const minusBtnFirst=document.getElementById('minus-btn-first');
+      minusBtnFirst.addEventListener('click',()=>{
+         update('-',1,'input-1','current-price-first');
+         
+      });
+      //second item plus button setup
+      const plusBtnSecond=document.getElementById('plus-btn-second');
+      plusBtnSecond.addEventListener('click',()=>{
+         update('+',2,'input-2','current-price-second');
+         
+      });
+      //second item Subtraction button setup
+      const minusBtnSecond=document.getElementById('minus-btn-second');
+      minusBtnSecond.addEventListener('click',()=>{
+         update('-',2,'input-2','current-price-second');
+         
+      });
+      // remove item to click cross symbol
+      const firstItem=document.getElementById('remove-item1');
+      firstItem.addEventListener('click',()=>{
+         document.getElementById('cart-first').style.display='none';
+      });
 
-   //update system function   
-   function update(symbol,currentNumber,currentPrice){
-      let number=document.getElementById(currentNumber).value;
-      number=parseInt(number);
-      const updatePrice=document.getElementById(currentPrice).innerText;
-      let updatePriceNumber=parseFloat(updatePrice);
-      if(symbol=='+'){
-         number++;
-         document.getElementById(currentPrice).innerText=updatePriceNumber+1219;
+      //update system function   
+      function update(symbol,num,currentNumber,currentPrice){
+         let number=document.getElementById(currentNumber).value;
+         number=parseInt(number);
+         const updatePrice=document.getElementById(currentPrice).innerText;
+         let updatePriceNumber=parseFloat(updatePrice);
+         if(symbol=='+'){
+            number++;
+            
+            if(num==1){
+               document.getElementById(currentPrice).innerText=updatePriceNumber+1219;
+            }
+            else{
+               document.getElementById(currentPrice).innerText=updatePriceNumber+59;
+            }
+         }
+         else{
+            number--;
+            if(num==1){
+               document.getElementById(currentPrice).innerText=updatePriceNumber-1219;
+            }
+            else{
+               document.getElementById(currentPrice).innerText=updatePriceNumber-59;
+            }
+         }
+         const newNumber=document.getElementById(currentNumber).value=number;
+
+         //set total and subtotal and total
+         const firstPrice=document.getElementById('current-price-first').innerText;
+         const secondPrice=document.getElementById('current-price-second').innerText;
+         let firstPriceNumber=parseFloat(firstPrice);
+         if(document.getElementById('cart-first').style.display=='none'){
+            firstPriceNumber=0;
+         }
+         const secondPriceNumber=parseFloat(secondPrice);
+         const subTotal=firstPriceNumber+secondPriceNumber;
+         const tax=subTotal*5/100;
+         const total=subTotal+tax;
+         console.log(subTotal);
+         document.getElementById('sub-total').innerText=subTotal;
+         document.getElementById('tax').innerText=tax;
+         document.getElementById('total').innerText=subTotal+tax;
       }
-      else{
-         number--;
-         document.getElementById(currentPrice).innerText=updatePriceNumber-1219;
-      }
-      const newNumber=document.getElementById(currentNumber).value=number;
-
-      //set total and subtotal and total
-      const firstPrice=document.getElementById('current-price-first').innerText;
-      const secondPrice=document.getElementById('current-price-second').innerText;
-      const firstPriceNumber=parseFloat(firstPrice);
-      const secondPriceNumber=parseFloat(secondPrice);
-      const subTotal=firstPriceNumber+secondPriceNumber;
-      const tax=subTotal*5/100;
-      const total=subTotal+tax;
-      console.log(subTotal);
-      document.getElementById('sub-total').innerText=subTotal;
-      document.getElementById('tax').innerText=taxNumber;
-      document.getElementById('total').innerText=subTotal+tax;
-   }
    </script>
 </body>
 </html>
